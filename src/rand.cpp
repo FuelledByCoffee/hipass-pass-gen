@@ -80,7 +80,7 @@ int random_wordpicker(uint wordcount, char separator)
                   << c << C_RESET;
     }
 
-    std::cout << std::endl;
+    std::cout << '\n';
     copy_to_clipboard_prompt(password.c_str());
     std::cout << std::endl;
     return 0;
