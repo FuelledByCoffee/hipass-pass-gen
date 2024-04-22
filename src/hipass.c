@@ -45,8 +45,8 @@
  * boolean declaration to parse command line into the generator algorithm
  * numeric digits, az-lowercase, AZ-uppercase, symbols;
  */
-bool CH_TYPE[4] = {0, 0, 0, 0};
-bool no_type    = 0;
+static bool CH_TYPE[4] = {0, 0, 0, 0};
+static bool no_type    = 0;
 
 //----------------------------------------------------------------------------
 // Program entrypoint
