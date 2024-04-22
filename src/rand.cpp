@@ -30,8 +30,8 @@ extern "C"
 // https://www.pcg-random.org/posts/simple-portable-cpp-seed-entropy.html
 int random_nr(int min, int max)
 {
-    std::uniform_int_distribution dist{min, max};
-    static std::mt19937           engine{randutils::auto_seed_256{}.base()};
+    auto        dist   = std::uniform_int_distribution{min, max};
+    static auto engine = std::mt19937{randutils::auto_seed_256{}.base()};
     return dist(engine);
 }
 
@@ -41,10 +41,10 @@ int random_nr(int min, int max)
 // v. 4.0 list made by sts10.
 int random_wordpicker(uint wordcount, char separator)
 {
-    std::vector<std::string> word_list;
-    std::string              password;
-    std::string              number = std::to_string(random_nr(0, 0xABC));
-    std::ifstream            file("dictionaries/ud2.txt");
+    auto word_list = std::vector<std::string>{};
+    auto password  = std::string{};
+    auto number    = std::to_string(random_nr(0, 0xABC));
+    auto file      = std::ifstream{"dictionaries/ud2.txt"};
 
     if (!file)
     {
