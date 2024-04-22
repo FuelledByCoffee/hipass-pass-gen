@@ -101,7 +101,7 @@ static int copy_to_clipboard(const char *str)
 
     const char *proto_cmd = "echo '%s' | %s";
     char        cmd[strlen(str) + strlen(proto_cmd) + strlen(tool) - 1];
-    sprintf(cmd, proto_cmd, str, tool);
+    snprintf(cmd, sizeof cmd, proto_cmd, str, tool);
     printf(C_GREEN "Password copied to clipboard.\n" C_RESET);
     return system(cmd);
 }
