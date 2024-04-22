@@ -62,10 +62,9 @@ int random_wordpicker(uint wordcount, char separator)
 
     // Select words from the dictionary using the random_nr(min, max) function
     // and append to string.
-    for (uint i = 0; i < wordcount; i++)
-    {
+    while (wordcount--)
         password += word_list[random_nr(0, word_list.size() - 1)] + separator;
-    }
+
     password += number;
 
     // This will output different colors for separators and words for better
