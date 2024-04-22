@@ -1,7 +1,8 @@
-#pragma  once
+#pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 int random_nr(int min, int max);

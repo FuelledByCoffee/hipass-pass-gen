@@ -1,6 +1,6 @@
 /**
  * Hipass CLI Password Generator
- * 
+ *
  * Author: @lknknm
  *  Date: April 2024
  *  Version: 0.2.0
@@ -8,14 +8,14 @@
  * Contributors:
  *  @FuelledByCoffee
  *  added CMake file and refactor structure.
- * 
+ *
  */
 
 #include <assert.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "clipboard.h"
 #include "generator.h"
@@ -39,20 +39,20 @@
 static const char symbols[] = "!@#^&*$";
 
 //----------------------------------------------------------------------------
-char *add_suffix(char *src, const char *suffix) 
+char *add_suffix(char *src, const char *suffix)
 {
     const int len = strlen(src);
-    char *tmp = realloc(src, len + strlen(suffix) + 1);
+    char     *tmp = realloc(src, len + strlen(suffix) + 1);
     if (!tmp) exit(1);
     strcpy(tmp + len, suffix);
     return tmp;
 }
 
 //----------------------------------------------------------------------------
-char *add_prefix(char *src, const char *prefix) 
+char *add_prefix(char *src, const char *prefix)
 {
     const int len = strlen(src);
-    char *tmp = malloc(len + strlen(prefix) + 1);
+    char     *tmp = malloc(len + strlen(prefix) + 1);
     if (!tmp) exit(1);
     strcpy(tmp, prefix);
     strcat(tmp, src);
@@ -61,26 +61,27 @@ char *add_prefix(char *src, const char *prefix)
 }
 
 //----------------------------------------------------------------------------
-// Recursive function will generate a random number between 
-// the 4 available character types. 
-// If a character type was not selected within arguments, generate random number again. 
+// Recursive function will generate a random number between
+// the 4 available character types.
+// If a character type was not selected within arguments, generate random number
+// again.
 int generate_type(bool CH_TYPE[])
 {
-    int char_type = random_nr(0, 3); 
-    if (CH_TYPE[char_type] == false)
-        return generate_type(CH_TYPE);
+    int char_type = random_nr(0, 3);
+    if (CH_TYPE[char_type] == false) return generate_type(CH_TYPE);
     return char_type;
 }
 
 //----------------------------------------------------------------------------
 // This is the main function behind the random characters password generation.
-// It uses the set of functions from the Jonathan Leffler library in order to generate
-// true random numbers and convert them to the character preferences input by users.
+// It uses the set of functions from the Jonathan Leffler library in order to
+// generate true random numbers and convert them to the character preferences
+// input by users.
 extern int generate_random_CLI(bool CH_TYPE[], char *suffix, char *prefix)
 {
-    printf(C_WHITE "▘▗ Hipass Password Generator\n\n" C_RESET);    
+    printf(C_WHITE "▘▗ Hipass Password Generator\n\n" C_RESET);
     int characters = 0;
-    do 
+    do
     {
         printf("Type in number of characters (between 14 and 1024): ");
         scanf("%i", &characters);
@@ -90,7 +91,7 @@ extern int generate_random_CLI(bool CH_TYPE[], char *suffix, char *prefix)
     } while (characters < 14 || characters > 1024);
 
     // Allocate memory as the number of characters * chars
-    char *password = malloc(characters + 1);
+    char *password       = malloc(characters + 1);
     password[characters] = '\0';
 
     if (password == NULL)
@@ -101,20 +102,21 @@ extern int generate_random_CLI(bool CH_TYPE[], char *suffix, char *prefix)
     }
 
     printf(C_GREEN "Password: ");
-    if (prefix != NULL)
-        printf(C_CYAN "%s", prefix);
+    if (prefix != NULL) printf(C_CYAN "%s", prefix);
     for (int i = 0; i < characters; i++)
     {
-        enum {
+        enum
+        {
             DIGIT,
             LOWER,
             UPPER,
             SYMBOL
         };
-        // Selected char_type arguments will be parsed in this recursive function.
+        // Selected char_type arguments will be parsed in this recursive
+        // function.
         int char_type = generate_type(CH_TYPE);
-        
-        switch (char_type) 
+
+        switch (char_type)
         {
         case DIGIT:
             password[i] = random_nr('0', '9');
@@ -136,11 +138,10 @@ extern int generate_random_CLI(bool CH_TYPE[], char *suffix, char *prefix)
     }
     if (suffix != NULL)
     {
-        password = add_suffix(password, suffix); 
+        password = add_suffix(password, suffix);
         printf(C_CYAN "%s", suffix);
     }
-    if (prefix != NULL)
-        password = add_prefix(password, prefix);
+    if (prefix != NULL) password = add_prefix(password, prefix);
 
     printf("\n");
     copy_to_clipboard_prompt(password);
@@ -152,11 +153,11 @@ extern int generate_random_CLI(bool CH_TYPE[], char *suffix, char *prefix)
 //----------------------------------------------------------------------------
 extern void generate_passphrase(char separator)
 {
-    printf(C_WHITE "▘▗ " C_CYAN "Hipass Password Generator\n\n" C_RESET);     
+    printf(C_WHITE "▘▗ " C_CYAN "Hipass Password Generator\n\n" C_RESET);
     uint word_count = 0;
     printf(C_RED "Separator %c\n", separator);
     printf(C_RESET);
-    do 
+    do
     {
         printf("Type in number of words (between 3 and 20): ");
         scanf("%i", &word_count);

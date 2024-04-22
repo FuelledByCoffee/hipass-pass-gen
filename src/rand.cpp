@@ -24,65 +24,65 @@
 extern "C"
 {
 #include "clipboard.h"
-    //----------------------------------------------------------------------------
-    // Random number generator that implements the randutils auto_seed_256 seed
-    // engine. More information on the seed engine in
-    // https://www.pcg-random.org/posts/simple-portable-cpp-seed-entropy.html
-    int random_nr(int min, int max)
+//----------------------------------------------------------------------------
+// Random number generator that implements the randutils auto_seed_256 seed
+// engine. More information on the seed engine in
+// https://www.pcg-random.org/posts/simple-portable-cpp-seed-entropy.html
+int random_nr(int min, int max)
+{
+    std::uniform_int_distribution dist{min, max};
+    static std::mt19937           engine{randutils::auto_seed_256{}.base()};
+    return dist(engine);
+}
+
+//----------------------------------------------------------------------------
+// Picks random words from the ud2 dictionary to output it into a string.
+// ud2.txt is a uniquely decodable list, based on Google Ngram data and Niceware
+// v. 4.0 list made by sts10.
+int random_wordpicker(uint wordcount, char separator)
+{
+    std::vector<std::string> word;
+    std::string              password;
+    std::string              sep{separator};
+    std::string              number = std::to_string(random_nr(0, 0xABC));
+    std::ifstream            file("dictionaries/ud2.txt");
+
+    if (!file)
     {
-        std::uniform_int_distribution dist{min, max};
-        static std::mt19937           engine{randutils::auto_seed_256{}.base()};
-        return dist(engine);
+        std::cerr << "Hipass couldn't open the file. Please try again or refer "
+                     "to the manpage.\n";
+        return 1;
+    }
+    for (std::string s; file >> s;) word.push_back(s);
+    if (word.empty())
+    {
+        std::cerr << "Hipass could not read the word. Please try again or "
+                     "refer to the manpage.\n";
+        return 1;
     }
 
-    //----------------------------------------------------------------------------
-    // Picks random words from the ud2 dictionary to output it into a string.
-    // ud2.txt is a uniquely decodable list, based on Google Ngram data and
-    // Niceware v. 4.0 list made by sts10.
-    int random_wordpicker(uint wordcount, char separator)
+    // Select words from the dictionary using the random_nr(min, max) function
+    // and append to string.
+    for (uint i = 0; i < wordcount; i++)
     {
-        std::vector<std::string> word;
-        std::string              password;
-        std::string              sep{separator};
-        std::string              number = std::to_string(random_nr(0, 0xABC));
-        std::ifstream            file("dictionaries/ud2.txt");
-
-        if (!file)
-        {
-            std::cerr << "Hipass couldn't open the file. Please try again or "
-                         "refer to the manpage.\n";
-            return 1;
-        }
-        for (std::string s; file >> s;) word.push_back(s);
-        if (word.empty())
-        {
-            std::cerr << "Hipass could not read the word. Please try again or "
-                         "refer to the manpage.\n";
-            return 1;
-        }
-
-        // Select words from the dictionary using the random_nr(min, max)
-        // function and append to string.
-        for (uint i = 0; i < wordcount; i++)
-        {
-            password.append(word[random_nr(0, 0xABCDEF) % word.size()]);
-            password.append(sep);
-        }
-        password.append(number);
-
-        // This will output different colors for separators and words for better
-        // user visibility.
-        for (char c : password)
-        {
-            std::cout << (c == separator ? C_RED
-                          : isdigit(c)   ? C_CYAN
-                                         : C_WHITE)
-                      << c << C_RESET;
-        }
-
-        std::cout << std::endl;
-        copy_to_clipboard_prompt(password.c_str());
-        std::cout << std::endl;
-        return 0;
+        password.append(word[random_nr(0, 0xABCDEF) % word.size()]);
+        password.append(sep);
     }
+    password.append(number);
+
+    // This will output different colors for separators and words for better
+    // user visibility.
+    for (char c : password)
+    {
+        std::cout << (c == separator ? C_RED
+                      : isdigit(c)   ? C_CYAN
+                                     : C_WHITE)
+                  << c << C_RESET;
+    }
+
+    std::cout << std::endl;
+    copy_to_clipboard_prompt(password.c_str());
+    std::cout << std::endl;
+    return 0;
+}
 }
