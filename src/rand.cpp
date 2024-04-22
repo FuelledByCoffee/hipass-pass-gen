@@ -65,7 +65,7 @@ int random_wordpicker(uint wordcount, char separator)
     // and append to string.
     for (uint i = 0; i < wordcount; i++)
     {
-        password.append(word[random_nr(0, 0xABCDEF) % word.size()]);
+        password.append(word[random_nr(0, word.size() - 1)]);
         password.append(sep);
     }
     password.append(number);
