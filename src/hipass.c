@@ -53,9 +53,9 @@ static bool no_type    = 0;
 int main(int argc, char **argv)
 {
     int   c;
-    char *prefix       = NULL;
-    char *suffix       = NULL;
-    char *separator    = NULL;
+    char *prefix    = NULL;
+    char *suffix    = NULL;
+    char *separator = NULL;
 
     while (1)
     {
