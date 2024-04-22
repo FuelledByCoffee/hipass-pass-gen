@@ -41,10 +41,10 @@ int random_nr(int min, int max)
 // v. 4.0 list made by sts10.
 int random_wordpicker(uint wordcount, char separator)
 {
-    auto word_list = std::vector<std::string>{};
-    auto password  = std::string{};
-    auto number    = std::to_string(random_nr(0, 0xABC));
-    auto file      = std::ifstream{"dictionaries/ud2.txt"};
+    auto       word_list = std::vector<std::string>{};
+    auto       password  = std::string{};
+    auto const number    = std::to_string(random_nr(0, 0xABC));
+    auto       file      = std::ifstream{"dictionaries/ud2.txt"};
 
     if (!file)
     {
