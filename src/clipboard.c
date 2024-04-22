@@ -131,5 +131,4 @@ void copy_to_clipboard_prompt(const char *str)
 
     // Clear input buffer:
     while ((getchar()) != '\n' && (getchar()) != EOF);
-    return;
 }
