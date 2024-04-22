@@ -43,7 +43,6 @@ int random_wordpicker(uint wordcount, char separator)
 {
     std::vector<std::string> word_list;
     std::string              password;
-    std::string              sep{separator};
     std::string              number = std::to_string(random_nr(0, 0xABC));
     std::ifstream            file("dictionaries/ud2.txt");
 
@@ -65,10 +64,9 @@ int random_wordpicker(uint wordcount, char separator)
     // and append to string.
     for (uint i = 0; i < wordcount; i++)
     {
-        password.append(word_list[random_nr(0, word_list.size() - 1)]);
-        password.append(sep);
+        password += word_list[random_nr(0, word_list.size() - 1)] + separator;
     }
-    password.append(number);
+    password += number;
 
     // This will output different colors for separators and words for better
     // user visibility.
