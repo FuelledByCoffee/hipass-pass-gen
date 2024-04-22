@@ -41,7 +41,7 @@ int random_nr(int min, int max)
 // v. 4.0 list made by sts10.
 int random_wordpicker(uint wordcount, char separator)
 {
-    std::vector<std::string> word;
+    std::vector<std::string> word_list;
     std::string              password;
     std::string              sep{separator};
     std::string              number = std::to_string(random_nr(0, 0xABC));
@@ -53,8 +53,8 @@ int random_wordpicker(uint wordcount, char separator)
                      "to the manpage.\n";
         return 1;
     }
-    for (std::string s; file >> s;) word.push_back(s);
-    if (word.empty())
+    for (std::string s; file >> s;) word_list.push_back(s);
+    if (word_list.empty())
     {
         std::cerr << "Hipass could not read the word. Please try again or "
                      "refer to the manpage.\n";
@@ -65,7 +65,7 @@ int random_wordpicker(uint wordcount, char separator)
     // and append to string.
     for (uint i = 0; i < wordcount; i++)
     {
-        password.append(word[random_nr(0, word.size() - 1)]);
+        password.append(word_list[random_nr(0, word_list.size() - 1)]);
         password.append(sep);
     }
     password.append(number);
