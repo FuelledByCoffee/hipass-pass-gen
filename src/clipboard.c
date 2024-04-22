@@ -109,7 +109,7 @@ int copy_to_clipboard(const char *str)
 //----------------------------------------------------------------------------
 // Prompts the user to clipboard copy. Sanitizes the user input to accept only
 // 'yes' or 'no' responses.
-extern void copy_to_clipboard_prompt(const char *str)
+void copy_to_clipboard_prompt(const char *str)
 {
     int clipPrompt;
     do

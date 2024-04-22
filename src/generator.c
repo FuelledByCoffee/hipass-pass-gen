@@ -77,7 +77,7 @@ int generate_type(bool CH_TYPE[])
 // It uses the set of functions from the Jonathan Leffler library in order to
 // generate true random numbers and convert them to the character preferences
 // input by users.
-extern int generate_random_CLI(bool CH_TYPE[], char *suffix, char *prefix)
+int generate_random_CLI(bool CH_TYPE[], char *suffix, char *prefix)
 {
     printf(C_WHITE "▘▗ Hipass Password Generator\n\n" C_RESET);
     int characters = 0;
@@ -151,10 +151,10 @@ extern int generate_random_CLI(bool CH_TYPE[], char *suffix, char *prefix)
 }
 
 //----------------------------------------------------------------------------
-extern void generate_passphrase(char separator)
+void generate_passphrase(char separator)
 {
     printf(C_WHITE "▘▗ " C_CYAN "Hipass Password Generator\n\n" C_RESET);
-    uint word_count = 0;
+    unsigned word_count = 0;
     printf(C_RED "Separator %c\n", separator);
     printf(C_RESET);
     do
