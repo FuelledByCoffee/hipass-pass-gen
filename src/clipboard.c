@@ -40,7 +40,7 @@
 // function is originally from a Stack Overflow answer, more information in the
 // link below.
 // https://stackoverflow.com/questions/41230547/check-if-program-is-installed-in-c
-bool can_run_command(const char *cmd)
+static bool can_run_command(const char *cmd)
 {
     if (strchr(cmd, '/'))
     {
@@ -86,7 +86,7 @@ bool can_run_command(const char *cmd)
 // Function used to copy the password to the clipboard.
 // It uses the can_run_command bool function to check which platform Hipass is
 // running on.
-int copy_to_clipboard(const char *str)
+static int copy_to_clipboard(const char *str)
 {
     const char       *tool         = NULL;
     const char *const clip_tools[] = {"clip.exe", // windows
