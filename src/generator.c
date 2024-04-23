@@ -43,7 +43,8 @@ char *add_suffix(char *src, const char *suffix)
 {
     const int len = strlen(src);
     char     *tmp = realloc(src, len + strlen(suffix) + 1);
-    if (!tmp) exit(1);
+    if (!tmp)
+        exit(1);
     strcpy(tmp + len, suffix);
     return tmp;
 }
@@ -53,7 +54,8 @@ char *add_prefix(char *src, const char *prefix)
 {
     const int len = strlen(src);
     char     *tmp = malloc(len + strlen(prefix) + 1);
-    if (!tmp) exit(1);
+    if (!tmp)
+        exit(1);
     strcpy(tmp, prefix);
     strcat(tmp, src);
     free(src);
@@ -68,7 +70,8 @@ char *add_prefix(char *src, const char *prefix)
 int generate_type(bool CH_TYPE[])
 {
     int char_type = random_nr(0, 3);
-    if (CH_TYPE[char_type] == false) return generate_type(CH_TYPE);
+    if (CH_TYPE[char_type] == false)
+        return generate_type(CH_TYPE);
     return char_type;
 }
 
@@ -87,7 +90,8 @@ int generate_random_CLI(bool CH_TYPE[], char *suffix, char *prefix)
         scanf("%i", &characters);
 
         // Clear input buffer:
-        while ((getchar()) != '\n' && (getchar()) != EOF);
+        while ((getchar()) != '\n' && (getchar()) != EOF)
+            ;
     } while (characters < 14 || characters > 1024);
 
     // Allocate memory as the number of characters * chars
@@ -102,7 +106,9 @@ int generate_random_CLI(bool CH_TYPE[], char *suffix, char *prefix)
     }
 
     printf(C_GREEN "Password: ");
-    if (prefix != NULL) printf(C_CYAN "%s", prefix);
+    if (prefix != NULL)
+        printf(C_CYAN "%s", prefix);
+    
     for (int i = 0; i < characters; i++)
     {
         enum
@@ -141,7 +147,8 @@ int generate_random_CLI(bool CH_TYPE[], char *suffix, char *prefix)
         password = add_suffix(password, suffix);
         printf(C_CYAN "%s", suffix);
     }
-    if (prefix != NULL) password = add_prefix(password, prefix);
+    if (prefix != NULL)
+        password = add_prefix(password, prefix);
 
     printf("\n");
     copy_to_clipboard_prompt(password);
@@ -163,7 +170,8 @@ void generate_passphrase(char separator)
         scanf("%i", &word_count);
 
         // Clear input buffer:
-        while ((getchar()) != '\n' && (getchar()) != EOF);
+        while ((getchar()) != '\n' && (getchar()) != EOF)
+            ;
     } while (word_count < 3 || word_count > 20);
     random_wordpicker(word_count, separator);
 }

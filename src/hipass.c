@@ -102,7 +102,8 @@ int main(int argc, char **argv)
         };
 
         c = getopt_long(argc, argv, "hv:p:12", long_options, &option_index);
-        if (c == -1) break;
+        if (c == -1)
+            break;
 
         switch (c)
         {

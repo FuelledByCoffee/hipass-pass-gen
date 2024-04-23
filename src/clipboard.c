@@ -49,10 +49,12 @@ static bool can_run_command(const char *cmd)
         return access(cmd, X_OK) == 0;
     }
     const char *path = getenv("PATH");
-    if (!path) return false; // something is horribly wrong...
+    if (!path)
+        return false; // something is horribly wrong...
     // we are sure we won't need a buffer any longer
     char *buf = malloc(strlen(path) + strlen(cmd) + 3);
-    if (!buf) return false; // actually useless, see comment
+    if (!buf)
+        return false; // actually useless, see comment
     // loop as long as we have stuff to examine in path
     for (; *path; ++path)
     {
@@ -64,9 +66,11 @@ static bool can_run_command(const char *cmd)
             *p = *path;
         }
         // empty path entries are treated like "."
-        if (p == buf) *p++ = '.';
+        if (p == buf)
+            *p++ = '.';
         // slash and command name
-        if (p[-1] != '/') *p++ = '/';
+        if (p[-1] != '/')
+            *p++ = '/';
         strcpy(p, cmd);
         // check if we can execute it
         if (access(buf, X_OK) == 0)
@@ -75,7 +79,8 @@ static bool can_run_command(const char *cmd)
             return true;
         }
         // quit at last cycle
-        if (!*path) break;
+        if (!*path)
+            break;
     }
     // not found
     free(buf);
@@ -130,5 +135,6 @@ void copy_to_clipboard_prompt(const char *password)
     } while (clipPrompt != 'y' || clipPrompt != 'n');
 
     // Clear input buffer:
-    while ((getchar()) != '\n' && (getchar()) != EOF);
+    while ((getchar()) != '\n' && (getchar()) != EOF)
+        ;
 }

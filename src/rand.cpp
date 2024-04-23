@@ -54,8 +54,9 @@ int random_wordpicker(uint wordcount, char separator)
         return 1;
     }
 
-    for (std::string s; file >> s;) word_list.push_back(std::move(s));
-    
+    for (std::string s; file >> s;)
+        word_list.push_back(std::move(s));
+
     if (word_list.empty())
     {
         std::cerr << "Hipass could not read the word. Please try again or "
