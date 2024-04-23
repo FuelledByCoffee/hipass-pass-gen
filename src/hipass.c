@@ -47,6 +47,39 @@
 static bool CH_TYPE[4] = {0, 0, 0, 0};
 static bool no_type    = 0;
 
+static const char *help_text =
+    C_WHITE "Hipass Password Generator\n\n" // Comment for formatting purposes
+    C_RESET "usage: hipass [--flag] [-f]\n"
+            "*no flags           User will be prompted to choose "
+            "character length\n"
+            "                    of a random password with A-Z "
+            "uppercase, "
+            "a-z lowercase, numbers and special characters\n"
+            "\n"
+            "The following arguments will generate passwords with the "
+            "ones user had selected.\n"
+            "Example: ./hipass AZ num sym az\n"
+            "\n"
+            "    AZ               Include A to Z uppercase "
+            "characters\n"
+            "    az               Include a to z lowercase "
+            "characters\n"
+            "    sym              Include special symbols\n"
+            "    num              Include digits from 0 to 9\n"
+            "\n"
+            " -h --help           Print out help text\n"
+            " -v --version        Print version\n"
+            "\n"
+            " --prefix PREFIX        Generate password with a desired "
+            "prefix\n"
+            " --suffix suffix        Generate password with a desired "
+            "suffix\n"
+            " -p --passphrase \'sep\'    Generate passphrase with a "
+            "desired char separator and a random number in the end\n"
+            "\n"
+            "Refer to README.md in the GitHub Repository for full "
+            "notes.\n";
+
 //----------------------------------------------------------------------------
 // Program entrypoint
 int main(int argc, char **argv)
@@ -74,44 +107,8 @@ int main(int argc, char **argv)
         switch (c)
         {
             case 'h':
-                printf(C_WHITE "Hipass Password Generator\n\n");
-                printf(C_RESET "usage: hipass [--flag] [-f]\n");
-                printf("*no flags           User will be prompted to choose "
-                       "character length\n");
-                printf("                    of a random password with A-Z "
-                       "uppercase, "
-                       "a-z lowercase, numbers and special characters\n");
-                printf("\n");
-                printf(
-                    "The following arguments will generate passwords with the "
-                    "ones user had selected.\n");
-                printf("Example: ./hipass AZ num sym az\n");
-                printf("\n");
-                printf("    AZ               Include A to Z uppercase "
-                       "characters\n");
-                printf("    az               Include a to z lowercase "
-                       "characters\n");
-                printf("    sym              Include special symbols\n");
-                printf("    num              Include digits from 0 to 9\n");
-                printf("\n");
-                printf(" -h --help           Print out help text\n");
-                printf(" -v --version        Print version\n");
-                printf("\n");
-                printf(
-                    " --prefix PREFIX        Generate password with a desired "
-                    "prefix\n");
-                printf(
-                    " --suffix suffix        Generate password with a desired "
-                    "suffix\n");
-                printf(
-                    " -p --passphrase \'sep\'    Generate passphrase with a "
-                    "desired char separator and a random number in the end\n");
-                printf("\n");
-                printf("Refer to README.md in the GitHub Repository for full "
-                       "notes.\n\n");
-
+                puts(help_text);
                 return 0;
-
             case 'v':
                 printf("hipass version " VERSION " release date " DATE);
                 printf("\n");
