@@ -109,7 +109,7 @@ static int copy_to_clipboard(const char *str)
 //----------------------------------------------------------------------------
 // Prompts the user to clipboard copy. Sanitizes the user input to accept only
 // 'yes' or 'no' responses.
-void copy_to_clipboard_prompt(const char *str)
+void copy_to_clipboard_prompt(const char *password)
 {
     int clipPrompt;
     do
@@ -120,7 +120,7 @@ void copy_to_clipboard_prompt(const char *str)
 
         if (tolower(clipPrompt) == 'y')
         {
-            copy_to_clipboard(str);
+            copy_to_clipboard(password);
             break;
         }
         if (tolower(clipPrompt) == 'n')

@@ -18,8 +18,8 @@ AllowAllArgumentsOnNextLine: true
 # braces on next line
 BreakBeforeBraces: Allman
 
+IndentCaseLabels: true
 IndentExternBlock: false
-
 IndentWidth: 4
 TabWidth: 4
 UseTab: Never

@@ -118,22 +118,22 @@ int generate_random_CLI(bool CH_TYPE[], char *suffix, char *prefix)
 
         switch (char_type)
         {
-        case DIGIT:
-            password[i] = random_nr('0', '9');
-            printf(C_BLUE "%c", password[i]);
-            break;
-        case LOWER:
-            password[i] = random_nr('a', 'z');
-            printf(C_WHITE "%c", password[i]);
-            break;
-        case UPPER:
-            password[i] = random_nr('A', 'Z');
-            printf(C_WHITE "%c", password[i]);
-            break;
-        case SYMBOL:
-            password[i] = symbols[random_nr(0, sizeof symbols - 2)];
-            printf(C_RED "%c", password[i]);
-            break;
+            case DIGIT:
+                password[i] = random_nr('0', '9');
+                printf(C_BLUE "%c", password[i]);
+                break;
+            case LOWER:
+                password[i] = random_nr('a', 'z');
+                printf(C_WHITE "%c", password[i]);
+                break;
+            case UPPER:
+                password[i] = random_nr('A', 'Z');
+                printf(C_WHITE "%c", password[i]);
+                break;
+            case SYMBOL:
+                password[i] = symbols[random_nr(0, sizeof symbols - 2)];
+                printf(C_RED "%c", password[i]);
+                break;
         }
     }
     if (suffix != NULL)

@@ -36,7 +36,7 @@ Of course they also offer robust password generators, but if you want an offline
 
 ### Usage
 ```
-  ./hipass [--flag] [f]
+./hipass [--flag] [f]
 ```
 
 ```

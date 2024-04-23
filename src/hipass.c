@@ -3,7 +3,8 @@
  *
  * This is the main file for Hipass Password Generator.
  *
- * Author: @lknknm
+ * Author:
+ *  @lknknm
  *  Date: April 2024
  *  Version: 0.2.0
  *
@@ -19,9 +20,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "clipboard.h"
 #include "generator.h"
-#include "rand.h"
 
 //----------------------------------------------------------------------------
 // Metadata:
@@ -59,8 +58,8 @@ int main(int argc, char **argv)
 
     while (1)
     {
-        int                  option_index       = 0;
-        static struct option long_options[]     = {
+        int                  option_index   = 0;
+        static struct option long_options[] = {
             {"help",       no_argument,       0, 'h'},
             {"version",    no_argument,       0, 'v'},
             {"suffix",     required_argument, 0, '1'},
@@ -74,75 +73,79 @@ int main(int argc, char **argv)
 
         switch (c)
         {
-        case 'h':
-            printf(C_WHITE "Hipass Password Generator\n\n");
-            printf(C_RESET "usage: hipass [--flag] [-f]\n");
-            printf("*no flags           User will be prompted to choose "
-                   "character length\n");
-            printf(
-                "                    of a random password with A-Z uppercase, "
-                "a-z lowercase, numbers and special characters\n");
-            printf("\n");
-            printf("The following arguments will generate passwords with the "
-                   "ones user had selected.\n");
-            printf("Example: ./hipass AZ num sym az\n");
-            printf("\n");
-            printf(
-                "    AZ               Include A to Z uppercase characters\n");
-            printf(
-                "    az               Include a to z lowercase characters\n");
-            printf("    sym              Include special symbols\n");
-            printf("    num              Include digits from 0 to 9\n");
-            printf("\n");
-            printf(" -h --help           Print out help text\n");
-            printf(" -v --version        Print version\n");
-            printf("\n");
-            printf(" --prefix PREFIX        Generate password with a desired "
-                   "prefix\n");
-            printf(" --suffix suffix        Generate password with a desired "
-                   "suffix\n");
-            printf(" -p --passphrase \'sep\'    Generate passphrase with a "
-                   "desired char separator and a random number in the end\n");
-            printf("\n");
-            printf("Refer to README.md in the GitHub Repository for full "
-                   "notes.\n\n");
-
-            return 0;
-
-        case 'v':
-            printf("hipass version " VERSION " release date " DATE);
-            printf("\n");
-            return 0;
-        case '1':
-            printf("option %s\n", long_options[option_index].name);
-            suffix = optarg;
-            if (suffix)
-            {
-                printf("suffix %s", suffix);
+            case 'h':
+                printf(C_WHITE "Hipass Password Generator\n\n");
+                printf(C_RESET "usage: hipass [--flag] [-f]\n");
+                printf("*no flags           User will be prompted to choose "
+                       "character length\n");
+                printf("                    of a random password with A-Z "
+                       "uppercase, "
+                       "a-z lowercase, numbers and special characters\n");
                 printf("\n");
-            }
-            printf("\n");
-            continue;
-
-        case '2':
-            printf("option %s\n", long_options[option_index].name);
-            prefix = optarg;
-            if (prefix)
-            {
-                printf("prefix %s", prefix);
+                printf(
+                    "The following arguments will generate passwords with the "
+                    "ones user had selected.\n");
+                printf("Example: ./hipass AZ num sym az\n");
                 printf("\n");
-            }
-            printf("\n");
-            break;
+                printf("    AZ               Include A to Z uppercase "
+                       "characters\n");
+                printf("    az               Include a to z lowercase "
+                       "characters\n");
+                printf("    sym              Include special symbols\n");
+                printf("    num              Include digits from 0 to 9\n");
+                printf("\n");
+                printf(" -h --help           Print out help text\n");
+                printf(" -v --version        Print version\n");
+                printf("\n");
+                printf(
+                    " --prefix PREFIX        Generate password with a desired "
+                    "prefix\n");
+                printf(
+                    " --suffix suffix        Generate password with a desired "
+                    "suffix\n");
+                printf(
+                    " -p --passphrase \'sep\'    Generate passphrase with a "
+                    "desired char separator and a random number in the end\n");
+                printf("\n");
+                printf("Refer to README.md in the GitHub Repository for full "
+                       "notes.\n\n");
 
-        case 'p':
-            separator = optarg;
-            generate_passphrase(*separator);
-            return 0;
+                return 0;
 
-        case '?':
-            printf("Option not available please prompt Hipass again\n");
-            return 0;
+            case 'v':
+                printf("hipass version " VERSION " release date " DATE);
+                printf("\n");
+                return 0;
+            case '1':
+                printf("option %s\n", long_options[option_index].name);
+                suffix = optarg;
+                if (suffix)
+                {
+                    printf("suffix %s", suffix);
+                    printf("\n");
+                }
+                printf("\n");
+                continue;
+
+            case '2':
+                printf("option %s\n", long_options[option_index].name);
+                prefix = optarg;
+                if (prefix)
+                {
+                    printf("prefix %s", prefix);
+                    printf("\n");
+                }
+                printf("\n");
+                break;
+
+            case 'p':
+                separator = optarg;
+                generate_passphrase(*separator);
+                return 0;
+
+            case '?':
+                printf("Option not available please prompt Hipass again\n");
+                return 0;
         }
     }
 

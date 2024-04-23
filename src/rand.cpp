@@ -2,6 +2,7 @@
 #include <ctype.h>
 #include <fstream>
 #include <iostream>
+#include <random>
 #include <string>
 #include <vector>
 
